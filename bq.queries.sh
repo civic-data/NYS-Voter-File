@@ -4,4 +4,5 @@
 # bq query --format csv 'select *,year(timestamp(dob)) birthyear from [nys.all_voter_file] order by birthyear limit 1000'
 
 # bq query "select count(*),sum(length(regexp_replace(voterhistory,'[^;]',''))) elections_voted, countycode from [nys.all_voter_file] group by countycode order by elections_voted desc limit 1000"
-bq query --max_rows 20000 --format csv "select count(*),sum(length(regexp_replace(voterhistory,'[^;]',''))) elections_voted, countycode from [nys.all_voter_file] group by countycode order by elections_voted desc limit 20000"
+# bq query --max_rows 20000 --format csv "select count(*),sum(length(regexp_replace(voterhistory,'[^;]',''))) elections_voted, countycode from [nys.all_voter_file] group by countycode order by elections_voted desc limit 20000"
+bq query --max_rows 20000 --format csv "select length(regexp_replace(voterhistory,'[^;]','')) elections_voted, firstname,lastname,voterhistory from [nys.all_voter_file] where lastname in ('YOZZO','ELDRIDGE','GROSSBERG') order by elections_voted desc limit 20000"
